@@ -1,0 +1,12 @@
+h3 { margin-left: 30px; }
+.view { width: 600px; margin: 0 auto; }
+label { display: inline-block; width: 110px; text-align: right;
+    font-weight: bold; }
+.contents { border: 1px solid #cccccc; display: inline-block;
+    width: 460px; min-height: 350px; }
+.view div label { padding-right: 10px; }
+button { margin: 5px; }
+button a:link { color: black; text-decoration: none; }
+button a:visited { color: black; text-decoration: none; }
+button a:active { color: black; }
+button a:hover { color: black; }

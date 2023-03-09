@@ -1,0 +1,28 @@
+.home { position: relative; }
+.home img { position: absolute; top: 100px; left: 250px; }
+
+/* 페이지 공통 */
+.container { border: 1px solid white; width: 1000px; height: 800px;
+    margin: 0 auto; }
+.header { padding-left: 20px; }
+.nav { border-bottom: 2px solid black; }
+.nav { list-style: none; margin-bottom: 50px; }
+.nav li { float: left; margin-right: 20px; padding-left: 100px; margin-top: 10px; }
+.nav li a:link { text-decoration: none; color: black; }
+.nav li a:visited { color: black; }
+.nav li a:hover { color: #b3d4fc; }
+.nav li a:active { color: lightcoral; }
+.main { width: 1000px; min-height: 700px; }
+.footer { text-align: center; border-top: 2px solid black; }
+
+/* 회원가입, 로그인 */
+.jogin h3 { margin-left: 30px; }
+.jogin form { margin: 0 auto; width: 320px; vertical-align: middle; }
+.jogin div { padding: 5px; }
+.jogin form label { display: inline-block; width: 110px; text-align: right;
+    font-weight: bold; }
+.jogin form input { padding: 5px; }
+.jogin button { padding: 5px 7px; }
+
+/* 새글 쓰기, 본문 보기 */
+.dragup { vertical-align: top; }
