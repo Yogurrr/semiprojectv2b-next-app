@@ -15,6 +15,7 @@ export default async (req, res) => {
 
         const rowData = await conn.query(sql);
         res.status(200).json(rowData);
+
     } catch (err) {
         console.log(err);
         res.status(500).json(err);

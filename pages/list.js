@@ -42,7 +42,7 @@ export default function List(props)  {
                         <td>{bd.regdate}</td>
                         <td>{bd.views}</td>
                     </tr>
-                ))};
+                ))}
 
                 </tbody>
             </table>
@@ -62,5 +62,5 @@ export default function List(props)  {
                 <li>다음</li>
             </ul>
         </main>
-    );
+    )
 }
