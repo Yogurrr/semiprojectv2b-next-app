@@ -8,6 +8,7 @@
 .board td:nth-child(odd) { background: lightblue; }
 .board td:nth-child(even) { background: lightsteelblue; }
 
+.alignlft {  }
 .alignlft select { margin: 0 10px; }
 .alignlft input { margin: 0 10px; }
 .alignlft button { margin: 0 10px; }
