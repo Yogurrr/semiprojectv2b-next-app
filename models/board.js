@@ -1,4 +1,4 @@
-import mariadb from "mariadb";
+import mariadb from "./MariaDB";
 const ppg = 25;
 
 let boardsql = {
@@ -55,7 +55,7 @@ class Board {
     async select(stnum, ftype, fkey) {   // 게시판 목록 출력
         let conn = null;
         let params = [stnum, stnum + ppg];
-        let [ allcnt, idx ] = [-1, -1];
+        let [allcnt, idx] = [-1, -1];
         let where = '';
         let rowData = '';   // 결과 저장용
 
@@ -76,6 +76,18 @@ class Board {
         let result = {'boards': rowData, 'allcnt': allcnt, 'idx': idx}
 
         return result;
+    }
+    async selectCount(conn, where) {   // 총 게시물 수 계산
+        let params = [];
+        let cnt = -1;   // 결과 저장용
+
+        try {
+            cnt = await conn.query(boardsql.selectCount + where, params);
+        } catch (e) {
+            console.log(e);
+        }
+
+        return parseInt(cnt[0].cnt);
     }
     async selectOne(bno) {   // 본문 조회
         let conn = null;
@@ -104,21 +116,6 @@ class Board {
         }
 
         return bds;
-    }
-    async selectCount(conn, where) {   // 총 게시물 수 계산
-        let params = [];
-        let cnt = -1;   // 결과 저장용
-
-        try {
-            cnt = await conn.query(boardsql.selectCount + where, params);
-            // let row = null;
-            // if ((row = await rs.getRow())) cnt = row.CNT;   // 총 게시글 수
-
-        } catch (e) {
-            console.log(e);
-        }
-
-        return parseInt(cnt[0].cnt);
     }
     async update() {
         let conn = null;

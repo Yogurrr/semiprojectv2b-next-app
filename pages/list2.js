@@ -1,5 +1,7 @@
 import Link from "next/link";
 import fetch from "isomorphic-unfetch";
+import {useState} from "react";
+import axios from "axios";
 // import mariadb from "mariadb";
 
 const getStpgns = (cpg, alpg) => {
@@ -34,10 +36,16 @@ export async function getServerSideProps(ctx) {
 
     cpg = cpg ? parseInt(cpg) : 1;
     let params = `cpg=${cpg}`;   // 질의문자열 생성
+    // if(fkey) params += `&ftype=${ftype}&fkey=${encodeURIComponent(fkey)}`;
+    if(fkey) params += `&ftype=${ftype}&fkey=${fkey}`;   // axios
+
     let url = `http://localhost:3000/api/board/list?${params}`;
     
-    const res = await fetch(url);
-    const boards = await res.json();
+    // const res = await fetch(url);   // isomorphic-unfetch
+    // const boards = await res.json();
+
+    const res = await axios.get(url);   // isomorphic-unfetch
+    const boards = await res.data;
 
     let alpg = Math.ceil(  parseInt(boards.allcnt) / 25);   // 총 페이지수 계산
 
@@ -55,6 +63,13 @@ export async function getServerSideProps(ctx) {
 }
 
 export default function List( {boards} )  {
+    const [ftype, setFtype] = useState('title');
+    const [fkey, setFkey] = useState(undefined);
+    const handletype = (e) => { setFtype(e.target.value); };
+    const handlekey = (e) => { setFkey(e.target.value) };
+    const handlefind = (e) => {
+        if (fkey) location.href = `?ftype=${ftype}&fkey=${fkey}`;
+    };
     return (
         <main className="list">
             <h3>게시판</h3>
@@ -68,6 +83,15 @@ export default function List( {boards} )  {
                 </colgroup>
                 <tbody>
                 <tr>
+                    <td colSpan="3" className="alignlft">
+                        <select name="ftype" id="ftype" onChange={handletype}>
+                            <option>제목</option>
+                            <option>작성자</option>
+                            <option>본문</option>
+                        </select>
+                        <select name="ftype" id="ftype" onChange={handlekey}></select>
+                        <select name="ftype" id="ftype" onChange={handlefind}></select>
+                    </td>
                     <td colSpan='5' className="alignrgt" style={{background: "white"}}>
                         <button><Link href='/write'>새글쓰기</Link></button>
                     </td>
