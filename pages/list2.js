@@ -2,7 +2,13 @@ import Link from "next/link";
 import fetch from "isomorphic-unfetch";
 
 export async function getServerSideProps(ctx) {
-    const res = await fetch(`http://localhost:3000/api/board/list`);
+    let [ cpg, ftype, fkey ] = [ ctx.query.cpg, ctx.query.ftype, ctx.query.fkey ];
+
+    cpg = cpg ? parseInt(cpg) : 1;
+    let params = `cpg=${cpg}`;   // 질의문자열 생성
+    let url = `http://localhost:3000/api/board/list?${params}`;
+    
+    const res = await fetch(url);
     const boards = await res.json();
 
     return { props : {boards} }
@@ -34,7 +40,7 @@ export default function List( {boards} )  {
                     <th>조회</th>
                 </tr>
 
-                {boards.map(bd => (
+                {boards.boards.map(bd => (
                     <tr key={bd.bno}>
                         <td>{bd.bno}</td>
                         <td>{bd.title}</td>
@@ -62,5 +68,5 @@ export default function List( {boards} )  {
                 <li>다음</li>
             </ul>
         </main>
-    );
+    )
 }
