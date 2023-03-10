@@ -1,6 +1,6 @@
 import Link from "next/link";
 import fetch from "isomorphic-unfetch";
-import mariadb from "mariadb";
+// import mariadb from "mariadb";
 
 const getStpgns = (cpg, alpg) => {
     let stpgn = parseInt((cpg - 1) / 10) * 10 + 1   // 페이지네이션 시작값
@@ -13,6 +13,20 @@ const getStpgns = (cpg, alpg) => {
         }
     }
     return stpgns;
+}
+
+const getPgns = (cpg, alpg) => {
+    let isprev = (cpg - 1 > 0);   // 이전 버튼 표시 여부 지정
+    let isnext = (cpg < alpg);   // 다음 버튼 표시 여부 지정
+    let isprev10 = (cpg - 1 >= 10);   // (cpg - 10 > 0)
+    let isnext10 = (cpg <= alpg - 10);   // (cpg + 10 < alpg)
+    let pgn = {'prev': cpg - 1, 'next': cpg + 1,   // 이전 : 현재 페이지 - 1, 다음 : 현재 페이지 + 1
+        'isprev': isprev, 'isnext': isnext,
+        'prev10': cpg - 10, 'next10': cpg + 10,
+        'isprev10': isprev10, 'isnext10': isnext10};
+    // 10 해서 안 되면 '9 + 1' 하기
+
+    return pgn;
 }
 
 export async function getServerSideProps(ctx) {
@@ -30,8 +44,12 @@ export async function getServerSideProps(ctx) {
     // 페이지네이션 처리 1
     let stpgns = getStpgns(cpg, alpg);
 
+    // 페이지네이션 처리 2
+    let pgn = getPgns(cpg, alpg);
+
     // 처리 결과를 boards 객체에 추가
     boards.stpgns = stpgns;
+    boards.pgn = pgn;
 
     return { props : {boards} }
 }
@@ -76,7 +94,9 @@ export default function List( {boards} )  {
             </table>
 
             <ul className="pagenation">
-                <li className="prev">이전</li>
+                {boards.pgn.isprev ? <li className="prev"><a href={`?cpg=${boards.pgn.prev}`}>이전</a></li> : ''}
+
+                {boards.pgn.isprev10 ? <li className="prev"><a href={`?cpg=${boards.pgn.prev10}`}>이전10</a></li> : ''}
 
                 {boards.stpgns.map( pgn => {
                     pgn.iscpg ?
@@ -84,7 +104,10 @@ export default function List( {boards} )  {
                     <li key={pgn.num}><a href={`?cpg=${pgn.num}`}>{pgn.num}</a></li>
                 })}
 
-                <li>다음</li>
+                {boards.pgn.isnext10 ? <li className="prev"><a href={`?cpg=${boards.pgn.next10}`}>다음10</a></li> : ''}
+
+                {boards.pgn.isnext ? <li className="prev"><a href={`?cpg=${boards.pgn.next}`}>다음</a></li> : ''}
+
             </ul>
         </main>
     )

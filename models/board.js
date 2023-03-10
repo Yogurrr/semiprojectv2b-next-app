@@ -3,9 +3,9 @@ const ppg = 25;
 
 let boardsql = {
     insert: 'insert into board (title, userid, contents) values (?, ?, ?)',
-    select: `select bno, title, userid, date_format(regdate, '%y-%m-%d') regdate, views from board order by bno desc limit 0, 25`,
+    select: `select bno, title, userid, to_char(regdate, 'YYYY-MM-DD') regdate, views from board order by bno desc limit 0, 25`,
 
-    select1: `select bno, title, userid, date_format(regdate, '%y-%m-%d') regdate, views from board`,
+    select1: `select bno, title, userid, to_char(regdate, 'YYYY-MM-DD') regdate, views from board`,
     select2: 'order by bno desc limit ?, 25',
 
     selectOne: `select * from board where bno = ?`,

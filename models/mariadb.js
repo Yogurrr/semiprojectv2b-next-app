@@ -7,7 +7,7 @@ const dbconfig = {
     database: process.env.MARIADB_DB,
 };
 
-const MariaDB = {
+const mariadb = {
 
     makeConn: async () => {
         try {
@@ -23,4 +23,4 @@ const MariaDB = {
     }
 }
 
-module.exports = MariaDB;
+module.exports = mariadb;
