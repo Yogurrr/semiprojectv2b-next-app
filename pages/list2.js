@@ -1,5 +1,19 @@
 import Link from "next/link";
 import fetch from "isomorphic-unfetch";
+import mariadb from "mariadb";
+
+const getStpgns = (cpg, alpg) => {
+    let stpgn = parseInt((cpg - 1) / 10) * 10 + 1   // 페이지네이션 시작값
+    let stpgns = [];
+    for (let i = stpgn; i < stpgn + 10; ++i) {
+        if (i <= alpg) {
+            let iscpg = (i === cpg) ? false : true;   // 현재 페이지 표시
+            let pgn = {'num': i, 'iscpg': iscpg}
+            stpgns.push(pgn);
+        }
+    }
+    return stpgns;
+}
 
 export async function getServerSideProps(ctx) {
     let [ cpg, ftype, fkey ] = [ ctx.query.cpg, ctx.query.ftype, ctx.query.fkey ];
@@ -10,6 +24,14 @@ export async function getServerSideProps(ctx) {
     
     const res = await fetch(url);
     const boards = await res.json();
+
+    let alpg = Math.ceil(  parseInt(boards.allcnt) / 25);   // 총 페이지수 계산
+
+    // 페이지네이션 처리 1
+    let stpgns = getStpgns(cpg, alpg);
+
+    // 처리 결과를 boards 객체에 추가
+    boards.stpgns = stpgns;
 
     return { props : {boards} }
 }
@@ -55,16 +77,13 @@ export default function List( {boards} )  {
 
             <ul className="pagenation">
                 <li className="prev">이전</li>
-                <li className="cpage">1</li>
-                <li>2</li>
-                <li>3</li>
-                <li>4</li>
-                <li>5</li>
-                <li>6</li>
-                <li>7</li>
-                <li>8</li>
-                <li>9</li>
-                <li>10</li>
+
+                {boards.stpgns.map( pgn => {
+                    pgn.iscpg ?
+                    <li key={pgn.num} className='cpage'>{pgn.num}</li> :
+                    <li key={pgn.num}><a href={`?cpg=${pgn.num}`}>{pgn.num}</a></li>
+                })}
+
                 <li>다음</li>
             </ul>
         </main>
