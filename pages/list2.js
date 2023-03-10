@@ -10,7 +10,7 @@ export async function getServerSideProps(ctx) {
 
 export default function List( {boards} )  {
     return (
-        <div className="list">
+        <main className="list">
             <h3>게시판</h3>
             <table className="board">
                 <colgroup>
@@ -43,8 +43,10 @@ export default function List( {boards} )  {
                         <td>{bd.views}</td>
                     </tr>
                 ))}
+
                 </tbody>
             </table>
+
             <ul className="pagenation">
                 <li className="prev">이전</li>
                 <li className="cpage">1</li>
@@ -59,6 +61,6 @@ export default function List( {boards} )  {
                 <li>10</li>
                 <li>다음</li>
             </ul>
-        </div>
+        </main>
     );
 }

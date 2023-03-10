@@ -3,9 +3,9 @@ import fetch from "isomorphic-unfetch";
 
 List.getInitialProps = async function(ctx) {
     const res = await fetch(`http://localhost:3000/api/board/list`);
-    const board = await res.json();
+    const boards = await res.json();
 
-    return { board : board }
+    return { board : boards }
 }
 
 export default function List(props)  {
@@ -34,7 +34,7 @@ export default function List(props)  {
                     <th>조회</th>
                 </tr>
 
-                {props.board.map(bd => (
+                {props.boards.map(bd => (
                     <tr key={bd.bno}>
                         <td>{bd.bno}</td>
                         <td>{bd.title}</td>
