@@ -2,15 +2,15 @@ import Link from "next/link";
 import fetch from "isomorphic-unfetch";
 import {useState} from "react";
 import axios from "axios";
-// import mariadb from "mariadb";
+import mariadb from "../models/mariadb";
 
 const getStpgns = (cpg, alpg) => {
-    let stpgn = parseInt((cpg - 1) / 10) * 10 + 1   // 페이지네이션 시작값
     let stpgns = [];
+    let stpgn = parseInt((cpg - 1) / 10) * 10 + 1   // 페이지네이션 시작값 계산
     for (let i = stpgn; i < stpgn + 10; ++i) {
-        if (i <= alpg) {
-            let iscpg = (i === cpg) ? false : true;   // 현재 페이지 표시
-            let pgn = {'num': i, 'iscpg': iscpg}
+        if (i <= alpg) {   // i가 총페이지수보다 같거나 작을 때 i 출력
+            let iscpg = (i == cpg) ? true : false;   // 현재 페이지 표시
+            let pgn = {'num': i, 'iscpg': iscpg};
             stpgns.push(pgn);
         }
     }
@@ -55,9 +55,13 @@ export async function getServerSideProps(ctx) {
     // 페이지네이션 처리 2
     let pgn = getPgns(cpg, alpg);
 
+    // 검색 시 검색 관련 질의문자열 생성
+    let qry = fkey ? `&ftype=${ftype}&fkey=${fkey}` : ``;
+
     // 처리 결과를 boards 객체에 추가
     boards.stpgns = stpgns;
     boards.pgn = pgn;
+    boards.qry = qry;
 
     return { props : {boards} }
 }
@@ -118,19 +122,19 @@ export default function List( {boards} )  {
             </table>
 
             <ul className="pagenation">
-                {boards.pgn.isprev ? <li className="prev"><a href={`?cpg=${boards.pgn.prev}`}>이전</a></li> : ''}
+                {boards.pgn.isprev ? <li className="prev"><a href={`?cpg=${boards.pgn.prev}${boards.qry}`}>이전</a></li> : ''}
 
-                {boards.pgn.isprev10 ? <li className="prev"><a href={`?cpg=${boards.pgn.prev10}`}>이전10</a></li> : ''}
+                {boards.pgn.isprev10 ? <li className="prev"><a href={`?cpg=${boards.pgn.prev10}${boards.qry}`}>이전10</a></li> : ''}
 
                 {boards.stpgns.map( pgn => {
                     pgn.iscpg ?
                     <li key={pgn.num} className='cpage'>{pgn.num}</li> :
-                    <li key={pgn.num}><a href={`?cpg=${pgn.num}`}>{pgn.num}</a></li>
+                    <li key={pgn.num}><a href={`?cpg=${pgn.num}${boards.qry}`}>{pgn.num}</a></li>
                 })}
 
-                {boards.pgn.isnext10 ? <li className="prev"><a href={`?cpg=${boards.pgn.next10}`}>다음10</a></li> : ''}
+                {boards.pgn.isnext10 ? <li className="prev"><a href={`?cpg=${boards.pgn.next10}${boards.qry}`}>다음10</a></li> : ''}
 
-                {boards.pgn.isnext ? <li className="prev"><a href={`?cpg=${boards.pgn.next}`}>다음</a></li> : ''}
+                {boards.pgn.isnext ? <li className="prev"><a href={`?cpg=${boards.pgn.next}${boards.qry}`}>다음</a></li> : ''}
 
             </ul>
         </main>
