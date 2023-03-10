@@ -10,7 +10,7 @@ Member.getInitialProps = async function(ctx) {
 
 export default function Member(props)  {
     return (
-        <main className="list">
+        <div className="list">
             <h3>게시판</h3>
             <table className="board">
                 <colgroup>
@@ -61,6 +61,6 @@ export default function Member(props)  {
                 <li>10</li>
                 <li>다음</li>
             </ul>
-        </main>
+        </div>
     )
 }

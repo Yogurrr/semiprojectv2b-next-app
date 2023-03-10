@@ -7,6 +7,10 @@
     text-overflow: ellipsis; }
 .board td:nth-child(odd) { background: lightblue; }
 .board td:nth-child(even) { background: lightsteelblue; }
+
+.alignlft select { margin: 0 10px; }
+.alignlft input { margin: 0 10px; }
+.alignlft button { margin: 0 10px; }
 .alignrgt { text-align-last: right; }
 
 .link a:link { text-decoration: none; color: black; }

@@ -2,7 +2,7 @@ import Link from "next/link";
 import fetch from "isomorphic-unfetch";
 import {useState} from "react";
 import axios from "axios";
-import mariadb from "../models/mariadb";
+// import mariadb from "../models/mariadb";
 
 const getStpgns = (cpg, alpg) => {
     let stpgns = [];
@@ -75,7 +75,7 @@ export default function List( {boards} )  {
         if (fkey) location.href = `?ftype=${ftype}&fkey=${fkey}`;
     };
     return (
-        <main className="list">
+        <div className="list">
             <h3>게시판</h3>
             <table className="board">
                 <colgroup>
@@ -89,14 +89,14 @@ export default function List( {boards} )  {
                 <tr>
                     <td colSpan="3" className="alignlft">
                         <select name="ftype" id="ftype" onChange={handletype}>
-                            <option>제목</option>
-                            <option>작성자</option>
-                            <option>본문</option>
+                            <option value="title">제목</option>
+                            <option value="userid">작성자</option>
+                            <option value="contents">본 문</option>
                         </select>
-                        <select name="ftype" id="ftype" onChange={handlekey}></select>
-                        <select name="ftype" id="ftype" onChange={handlefind}></select>
+                        <input type="text" name="fkey" id="fkey" onChange={handlekey} />
+                        <button type="button" id="findbtn" onClick={handlefind}>검색하기</button>
                     </td>
-                    <td colSpan='5' className="alignrgt" style={{background: "white"}}>
+                    <td colSpan="2" className="alignrgt" style={{background: "white"}}>
                         <button><Link href='/write'>새글쓰기</Link></button>
                     </td>
                 </tr>
@@ -111,7 +111,7 @@ export default function List( {boards} )  {
                 {boards.boards.map(bd => (
                     <tr key={bd.bno}>
                         <td>{bd.bno}</td>
-                        <td>{bd.title}</td>
+                        <td><Link href={`/board/view?bno=${bd.bno}`}>{bd.title}</Link></td>
                         <td>{bd.userid}</td>
                         <td>{bd.regdate}</td>
                         <td>{bd.views}</td>
@@ -132,11 +132,11 @@ export default function List( {boards} )  {
                     <li key={pgn.num}><a href={`?cpg=${pgn.num}${boards.qry}`}>{pgn.num}</a></li>
                 })}
 
-                {boards.pgn.isnext10 ? <li className="prev"><a href={`?cpg=${boards.pgn.next10}${boards.qry}`}>다음10</a></li> : ''}
+                {boards.pgn.isnext10 ? <li><a href={`?cpg=${boards.pgn.next10}${boards.qry}`}>다음10</a></li> : ''}
 
-                {boards.pgn.isnext ? <li className="prev"><a href={`?cpg=${boards.pgn.next}${boards.qry}`}>다음</a></li> : ''}
+                {boards.pgn.isnext ? <li><a href={`?cpg=${boards.pgn.next}${boards.qry}`}>다음</a></li> : ''}
 
             </ul>
-        </main>
+        </div>
     )
 }
