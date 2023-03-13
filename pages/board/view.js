@@ -6,7 +6,6 @@ export async function getServerSideProps(ctx) {
     const url = `http://localhost:3000/api/board/view?bno=${bno}`;
     const res = await axios.get(url);
     const board = await res.data[0];
-    console.log(board);
 
     return { props: {board} }
 }
@@ -14,7 +13,7 @@ export async function getServerSideProps(ctx) {
 export default function View ({board}) {
 
     const newOne = () => { location.href = '/board/write'; };
-    const go2list = () => { location.href = '/board/list'; };
+    const go2list = () => { location.href = '/board/list2'; };
     const updateOne = () => { location.href = `/board/update?bno=${board.bno}`; }
     const deleteOne = () => {
         if (confirm('정말 삭제하시겠습니까?')) location.href = `/board/delete?bno=${board.bno}`;
@@ -41,6 +40,7 @@ export default function View ({board}) {
                     <div><label></label>
                         <button type="button" onclick={newOne}>새글쓰기</button>
                         <button type="button" onclick={go2list}>목록으로</button>
+
                         <button type="button" onClick={updateOne} id="updatebtn">수정하기</button>
                         <button type="button" onClick={deleteOne} id="deletebtn">삭제하기</button>
                     </div>

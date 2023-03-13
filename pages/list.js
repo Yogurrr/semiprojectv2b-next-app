@@ -23,7 +23,7 @@ export default function List(props)  {
                 <tbody>
                 <tr>
                     <td colSpan='5' className="alignrgt" style={{background: "white"}}>
-                        <button><Link href='/write'>새글쓰기</Link></button>
+                        <button><Link href='/board/write'>새글쓰기</Link></button>
                     </td>
                 </tr>
                 <tr>

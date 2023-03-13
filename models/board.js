@@ -34,6 +34,10 @@ class Board {
         this.views = views;
     }
 
+    static newOne(title, userid, contents) {
+        return new Board(null, title, userid, null, contents, null);
+    }
+
     async insert() {   // 새글쓰기
         let conn = null;
         let params = [this.title, this.userid, this.contents];
@@ -114,7 +118,7 @@ class Board {
             await mariadb.closeConn();
         }
 
-        return bds;
+        return result;
     }
     async update() {
         let conn = null;

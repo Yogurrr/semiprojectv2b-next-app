@@ -36,16 +36,16 @@ export async function getServerSideProps(ctx) {
 
     cpg = cpg ? parseInt(cpg) : 1;
     let params = `cpg=${cpg}`;   // 질의문자열 생성
-    if(fkey) params += `&ftype=${ftype}&fkey=${encodeURIComponent(fkey)}`;
-    // if(fkey) params += `&ftype=${ftype}&fkey=${fkey}`;   // axios
+    // if(fkey) params += `&ftype=${ftype}&fkey=${encodeURIComponent(fkey)}`;
+    if(fkey) params += `&ftype=${ftype}&fkey=${fkey}`;   // axios
 
     let url = `http://localhost:3000/api/board/list?${params}`;
     
-    const res = await fetch(url);   // isomorphic-unfetch
-    const boards = await res.json();
+    // const res = await fetch(url);   // isomorphic-unfetch
+    // const boards = await res.json();
 
-    // const res = await axios.get(url);   // isomorphic-unfetch
-    // const boards = await res.data;
+    const res = await axios.get(url);   // axios
+    const boards = await res.data;
 
     let alpg = Math.ceil(  parseInt(boards.allcnt) / 25);   // 총 페이지수 계산
 
@@ -74,8 +74,11 @@ export default function List( {boards} )  {
     const handlefind = (e) => {
         if (fkey) location.href = `?ftype=${ftype}&fkey=${fkey}`;
     };
+    const handlewrite = () => {
+        location.href = '/board/write';
+    };
     return (
-        <div className="list">
+        <main className="list">
             <h3>게시판</h3>
             <table className="board">
                 <colgroup>
@@ -97,7 +100,8 @@ export default function List( {boards} )  {
                         <button type="button" id="findbtn" onClick={handlefind}>검색하기</button>
                     </td>
                     <td colSpan="2" className="alignrgt" style={{background: "white"}}>
-                        <button><Link href='/write'>새글쓰기</Link></button>
+                        <button onClick={handlewrite}>새글쓰기</button>
+                        {/*<Link href='/write'></Link>*/}
                     </td>
                 </tr>
                 <tr>
@@ -122,21 +126,24 @@ export default function List( {boards} )  {
             </table>
 
             <ul className="pagenation">
-                {boards.pgn.isprev ? <li className="prev"><a href={`?cpg=${boards.pgn.prev}${boards.qry}`}>이전</a></li> : ''}
+                {boards.pgn.isprev ?
+                    <li> <a href={`?cpg=${boards.pgn.prev}${boards.qry}`}>이전</a> </li> : ''}
 
-                {boards.pgn.isprev10 ? <li className="prev"><a href={`?cpg=${boards.pgn.prev10}${boards.qry}`}>이전10</a></li> : ''}
+                {boards.pgn.isprev10 ?
+                    <li> <a href={`?cpg=${boards.pgn.prev10}${boards.qry}`}>이전10</a> </li> : ''}
 
-                {boards.stpgns.map( pgn => {
+                {boards.stpgns.map(pgn => (
                     pgn.iscpg ?
-                    <li key={pgn.num} className='cpage'>{pgn.num}</li> :
-                    <li key={pgn.num}><a href={`?cpg=${pgn.num}${boards.qry}`}>{pgn.num}</a></li>
-                })}
+                        <li key={pgn.num} className='cpage'>{pgn.num}</li> :
+                        <li key={pgn.num}><a href={`?cpg=${pgn.num}${boards.qry}`}>{pgn.num}</a></li>
+                ))}
 
-                {boards.pgn.isnext10 ? <li><a href={`?cpg=${boards.pgn.next10}${boards.qry}`}>다음10</a></li> : ''}
+                {boards.pgn.isnext10 ?
+                    <li> <a href={`?cpg=${boards.pgn.next10}${boards.qry}`}>다음10</a> </li> : ''}
 
-                {boards.pgn.isnext ? <li><a href={`?cpg=${boards.pgn.next}${boards.qry}`}>다음</a></li> : ''}
-
+                {boards.pgn.isnext ?
+                    <li> <a href={`?cpg=${boards.pgn.next}${boards.qry}`}>다음</a> </li> : ''}
             </ul>
-        </div>
+        </main>
     )
 }

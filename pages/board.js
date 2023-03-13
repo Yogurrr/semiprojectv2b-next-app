@@ -28,7 +28,7 @@ const Board = () => {
                 </span></div>
 
                 <div><label></label>
-                    <button type="button"><Link href='/write'>새글쓰기</Link>
+                    <button type="button"><Link href='/board/write'>새글쓰기</Link>
                     </button>
                     <button type="button"><Link href='/list'>목록으로</Link></button>
                     <button type="button">수정하기</button>
