@@ -1,18 +1,5 @@
 import {useState} from "react";
-
 import axios from "axios";
-// import {getRawProjectId} from "next/dist/telemetry/project-id";
-
-export async function getServerSideProps(ctx) {
-    let bno = ctx.query.bno;
-
-    const url = `http://localhost:3000/api/board/view?bno=${bno}`;
-    const res = await axios.get(url);
-    const board = await res.data[0];
-    // console.log(board);
-
-    return { props: {board} }
-}
 
 const check_captcha = async (response) => {
     let url = '/api/board/recaptcha?response=' + response;
@@ -33,27 +20,22 @@ export default function Write()  {
     const [title, setTitle] = useState('');
     const [userid, setUserid] = useState('yogurrr');
     const [contents, setContents] = useState('');
-    // const [recaptcha, setRecaptcha] = useState(undefined);
 
-    const handlewrite = () => {
+    const handlewrite = async () => {
         if (grecaptcha.getResponse() && check_captcha(grecaptcha.getResponse())) {
             // 글쓰기 작업 진행
             const data = {title: title, userid: userid, contents: contents};
-            if (process_write(data) > 0) {
+            if (await process_write(data) > 0) {
                 location.href = '/board/list2';
             }
         }
     };
-    const handleTitle = (e) => {
-        setTitle(e.target.value)
-    };
-    const handleContents = (e) => {
-        setContents(e.target.value)
-    };
+    const handleTitle = (e) => { setTitle(e.target.value) };
+    const handleContents = (e) => { setContents(e.target.value) };
     return (
         <main className="write">
-            <div id="main">
-                <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+            <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+                <div id="main">
                 <h3>새글쓰기</h3>
                 <form name="write" className="writefrm">
                     <div><label htmlFor="title">제목</label>

@@ -16,7 +16,7 @@ export default function View ({board}) {
     const go2list = () => { location.href = '/board/list2'; };
     const updateOne = () => { location.href = `/board/update?bno=${board.bno}`; }
     const deleteOne = () => {
-        if (confirm('정말 삭제하시겠습니까?')) location.href = `/board/delete?bno=${board.bno}`;
+        if (confirm('정말 삭제하시겠습니까?')) location.href = `/api/board/delete?bno=${board.bno}`;
     }
 
     return (
