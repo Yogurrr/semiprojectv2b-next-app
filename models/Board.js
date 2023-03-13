@@ -8,11 +8,11 @@ let boardsql = {
     select1: `select bno, title, userid, date_format(regdate, '%y-%m-%d') regdate, views from board `,
     select2: `order by bno desc limit ?, 25`,
 
-    selectOne: `select * from board where bno = ?`,
-    selectCount: `select count(bno) cnt from board`,
-    viewOne: `update board set views = views + 1 where bno = ?`,
-    update: 'update board set title = ?, contents = ?, regdate = current_timestamp where bno = ?',
-    delete: 'delete from board where bno = ?'
+    selectOne: ` select * from board where bno = ?`,
+    selectCount: ` select count(bno) cnt from board`,
+    viewOne: ` update board set views = views + 1 where bno = ?`,
+    update: ' update board set title = ?, contents = ?, regdate = current_timestamp where bno = ?',
+    delete: ' delete from board where bno = ?'
 }
 // viewOne은 조회수 증가 셀렉트문
 
