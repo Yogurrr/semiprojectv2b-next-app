@@ -1,4 +1,4 @@
-import Board from "/models/board";
+import Board from "/models/Board";
 
 export default async (req, res) => {
     let [ cpg, ftype, fkey ] = [ req.query.cpg, req.query.ftype, req.query.fkey ];

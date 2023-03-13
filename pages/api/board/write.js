@@ -1,4 +1,4 @@
-import Board from "../../board";
+import Board from "/models/Board";
 
 export default async (req, res) => {
     const {title, userid, contents} = req.body;

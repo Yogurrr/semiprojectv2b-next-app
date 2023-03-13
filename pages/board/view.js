@@ -37,13 +37,13 @@ export default function View ({board}) {
 
                 <input type="hidden" id="bno" value={board.bno} />
                 <input type="hidden" id="uid" value={board.userid} />
-                    <div><label></label>
-                        <button type="button" onclick={newOne}>새글쓰기</button>
-                        <button type="button" onclick={go2list}>목록으로</button>
 
-                        <button type="button" onClick={updateOne} id="updatebtn">수정하기</button>
-                        <button type="button" onClick={deleteOne} id="deletebtn">삭제하기</button>
-                    </div>
+                <div><label></label>
+                    <button type="button" onclick={newOne}>새글쓰기</button>
+                    <button type="button" onclick={go2list}>목록으로</button>
+                    <button type="button" onClick={updateOne} id="updatebtn">수정하기</button>
+                    <button type="button" onClick={deleteOne} id="deletebtn">삭제하기</button>
+                </div>
             </div>
         </main>
     )

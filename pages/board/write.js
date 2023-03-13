@@ -22,7 +22,7 @@ export default function Write()  {
     const [contents, setContents] = useState('');
 
     const handlewrite = async () => {
-        if (grecaptcha.getResponse() && check_captcha(grecaptcha.getResponse())) {
+        if (grecaptcha.getResponse() && await check_captcha(grecaptcha.getResponse())) {
             // 글쓰기 작업 진행
             const data = {title: title, userid: userid, contents: contents};
             if (await process_write(data) > 0) {
