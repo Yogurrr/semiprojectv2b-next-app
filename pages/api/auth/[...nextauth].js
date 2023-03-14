@@ -1,28 +1,40 @@
 // npm install next-auth@3.29.10 --save-dev
 // 경로 : /pages/api/auth/[...nextauth].js
-import CredentialsProvider from "next-auth/providers/credentials";
+import Credentials from "next-auth/providers/credentials";
 import NextAuth from "next-auth";
 
 export default NextAuth({
-        providers: [
-    CredentialsProvider({
-        name: "email-passwd-credentials",
-        credentials: {
-            email: { label: "이메일", type: "email" },
-            password: { label: "비밀번호", type: "password" }
-        },   // 로그인 폼 정의
-        async authorize(credentials, req) {
-            // 입력한 인증 정보 가져옴
-            const email = credentials.email;
-            const passwd = credentials.passwd;
-
-            if (email === 'abc123@987xyz.com' && passwd === '987xyz') {
-                return credentials;
+    providers: [
+        Credentials({
+            name: "userid-passwd-credentials",
+            credentials: {
+                userid: { label: "아이디", type: "text" },
+                passwd: { label: "비밀번호", type: "password" }
+            },   // 로그인 폼 정의
+            async authorize(credentials, req) {
+                // 입력한 인증 정보 가져옴
+                const userid = credentials.userid;
+                const passwd = credentials.passwd;
+                if (userid === 'aaa111' && passwd === 'bbb111') {
+                    return credentials;
+                }
             }
-            // // 아무거나 입력해도 그냥 로그인 됨
-            // console.log('auth login - ', credentials);
-            // return credentials;
+        })
+    ],
+    callbacks: {
+        // token, user, account, profile, isNewUser
+        async jwt(token, user, account, profile, isNewUser) {
+            console.log('jwt - ', user);
+            if (user?.userid) token.userid = user.userid;
+
+            return token;
+            },
+        // session, userOrToken
+        async session(session, userOrToken) {
+            console.log('session - ', userOrToken);
+            session.user.userid = userOrToken.userid;
+
+            return session;
         }
-    })
-]
+    }
 });
