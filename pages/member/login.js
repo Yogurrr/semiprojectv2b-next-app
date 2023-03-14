@@ -1,20 +1,6 @@
 import React, {useState} from "react";
 import axios from "axios";
-import {handleInput} from "/models/Utils";
-
-export async function getServerSideProps(ctx) {
-    // let userid = ctx.query.userid;
-    // let passwd = ctx.query.userid;
-    let userid = 'aaa111';
-    let passwd = 'bbb111';
-    let url = `http://localhost:3000/api/member/login?userid=${userid}&passwd=${passwd}`;
-
-    const res = await axios.get(url);
-    const member = await res.data[0];
-    console.log('pg login - ', await member);
-
-    return {props: {member} }
-}
+import {handleInput} from "../../models/Utils";
 
 export default function Login () {
 
