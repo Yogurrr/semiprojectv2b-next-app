@@ -5,8 +5,7 @@ let membersql = {
         ' values (?, ?, ?, ?) ',
     loginsql : ' select count(userid) cnt from MEMBER ' +
         ' where userid = ? and passwd = ? ',
-    selectOne: ' select mno, userid, name, email, ' +
-        ` date_format(regdate, '%y-%m-%d %HH:%i:%s') regdate ` +
+    selectOne: ` select mno, userid, name, email, date_format(regdate, '%y-%m-%d %HH:%i:%s') regdate ` +
         ' from member where userid = ? '
 }
 

@@ -1,30 +1,41 @@
+import axios from "axios";
 
-const Myinfo = () => {
+export async function getServerSideProps(ctx) {
+    // let userid = ctx.query.userid;
+    let userid = 'xyz987';
+    let url = `http://localhost:3000/api/member/myinfo?userid=${userid}`;
+
+    const res = await axios.get(url);
+    const member = await res.data[0];
+    console.log('pg myinfo - ', await member);
+
+    return {props: {member} }
+}
+
+export default function Myinfo({member}) {
     return (
-        <div>
+        <main>
             <h3>회원정보</h3>
             <table className="myinfo">
                 <tbody>
                 <tr>
                     <td>아이디</td>
-                    <td>yogurrr</td>
+                    <td>{member.userid}</td>
                 </tr>
                 <tr>
                     <td>이름</td>
-                    <td>요굴</td>
+                    <td>{member.name}</td>
                 </tr>
                 <tr>
                     <td>이메일</td>
-                    <td>yogurrr@naver.com</td>
+                    <td>{member.email}</td>
                 </tr>
                 <tr>
                     <td>가입일</td>
-                    <td>2023-01-10 17:54:33</td>
+                    <td>{member.regdate}</td>
                 </tr>
                 </tbody>
             </table>
-        </div>
+        </main>
     )
 }
-
-export default Myinfo;

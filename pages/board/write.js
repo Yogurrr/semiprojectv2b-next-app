@@ -22,7 +22,7 @@ export default function Write()  {
 
     return (
         <main className="write">
-            <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+            <script src="https://www.google.com/recaptcha/api.js?render=explicit" async defer></script>
                 <div id="main">
                 <h3>새글쓰기</h3>
                 <form name="write" className="writefrm">

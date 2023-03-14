@@ -14,7 +14,7 @@ footer { text-align: center; border-top: 2px solid black; }
 
 /* 회원가입, 로그인 */
 main h3 { margin-left: 30px; }
-form { margin: 0 auto; width: 320px; vertical-align: middle; }
+form { margin: 0 auto; width: 350px; vertical-align: middle; }
 div { padding: 5px; }
 form label { display: inline-block; width: 110px; text-align: right;
     font-weight: bold; }
@@ -72,5 +72,13 @@ h3 { margin-left: 30px; }
 .cap {
     display: inline-flex;
     padding: 0;
-    margin: -15px 0 0 -10px;
+    margin: -10px 0 0 -10px;
+    width: 200px;
 }
+/*
+.cap2 {
+    display: inline-flex;
+    padding: 0;
+    margin: -10px 0 0 -10px;
+    width: 200px;
+}*/
