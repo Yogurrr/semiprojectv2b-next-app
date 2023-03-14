@@ -1,6 +1,7 @@
 import React, {useState} from "react";
 import axios from "axios";
 import {handleInput} from "../../models/Utils";
+import {signIn} from "next-auth/client";
 
 export default function Login () {
 
@@ -10,12 +11,13 @@ export default function Login () {
     const handlelogin = async () => {
         const data = {userid: userid, passwd: passwd};
 
-        let params = `?userid=${userid}&passwd=${passwd}`;
-        let url = `http://localhost:3000/api/member/login${params}`;
-        const res = await axios.get(url);
-        const result = await res.data;
+        // signIn(인증시 활용할 Credential id, 인증시 사용할 정보)
+        const res = await signIn('userid-passwd-credentials', {
+            userid, passwd,
+            redirect: true
+        });
 
-        console.log('pg login - ', await result);
+        console.log('pg login - ', await res.status);
     };
 
     return (
