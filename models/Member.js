@@ -3,10 +3,10 @@ const mariadb = require('../models/mariadb');
 let membersql = {
     insertsql : ' insert into MEMBER (userid, passwd, name, email) ' +
         ' values (?, ?, ?, ?) ',
-    loginsql : ' select count(userid) cnt from MEMBER ' +
+    loginsql : ' select count(userid) cnt, name, email from MEMBER ' +
         ' where userid = ? and passwd = ? ',
     selectOne: ` select mno, userid, name, email, date_format(regdate, '%y-%m-%d %HH:%i:%s') regdate ` +
-        ' from member where userid = ? '
+        ' from MEMBER where userid = ? '
 }
 
 class Member {

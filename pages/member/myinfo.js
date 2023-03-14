@@ -2,7 +2,7 @@ import axios from "axios";
 
 export async function getServerSideProps(ctx) {
     // let userid = ctx.query.userid;
-    let userid = 'xyz987';
+    let userid = 'aaa111';
     let url = `http://localhost:3000/api/member/myinfo?userid=${userid}`;
 
     const res = await axios.get(url);
