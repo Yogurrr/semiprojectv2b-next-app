@@ -3,8 +3,10 @@ import {check_captcha, handleInput, hashPassword, process_submit} from "../../mo
 import {getSession} from "next-auth/client";
 
 export async function getServerSideProps(ctx) {
+
     // 세션 객체 가져오기
     const sess = await getSession(ctx);
+
     if (sess) {   // 로그인한 경우 회원정보로 이동
         return {
             redirect: {permanent: false, destination: '/member/myinfo'},
@@ -26,12 +28,11 @@ export default function Join() {
     const handlejoin = async () => {
         if (grecaptcha.getResponse() && check_captcha(grecaptcha.getResponse())) {
             // 회원가입 작업 진행
-            let hshpwd = await hashPassword(passwd);   // 암호를 해쉬화 함
+
+            let hshpwd = await hashPassword(passwd);   // 암호를 해시화 함
             const data = {userid: userid, passwd: await hshpwd, name: name, email: email};
             if (await process_submit('/api/member/join', data) > 0) {
                 location.href = '/member/login';
-            } else {
-                alert('!!!');
             }
         }
     };

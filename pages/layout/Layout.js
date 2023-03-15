@@ -1,7 +1,8 @@
 import Nav from "./Nav";
 import Header from "./Header";
 
-const Layout = ({children}) => {
+const Layout = ({children, menu}) => {
+    console.log('layout - ', menu)
     return (
             <html lang="ko">
                 <head>
@@ -17,7 +18,7 @@ const Layout = ({children}) => {
                 <body>
                 <div className="container">
                     <Header />
-                    <Nav />
+                    <Nav menu={menu} />
                     <main>{children}</main>
                     <footer className="footer">
                         <p>copyright &copy; 2023. yogurrr. All Rights Reserved.</p>

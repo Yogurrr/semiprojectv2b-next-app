@@ -1,4 +1,4 @@
-import Member from "/models/Member";
+import Member from "../../../models/Member";
 
 export default async (req, res) => {
     const { userid } = req.query;
