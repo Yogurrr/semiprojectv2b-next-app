@@ -82,3 +82,10 @@ h3 { margin-left: 30px; }
     margin: -10px 0 0 -10px;
     width: 200px;
 }*/
+
+/* 로그아웃 버튼 */
+.logout {
+    position: absolute;
+    top: 50%;
+    left: 45%;
+}
