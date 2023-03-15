@@ -23,8 +23,8 @@ MyApp.getInitialProps = async (ctx) => {
     const appProps = await App.getInitialProps(ctx);
 
     const sess = await getSession(ctx);
-    let menu = '<a href="member/login">로그인</a>';
-    if (sess) menu = '<a href="member/logout">로그아웃</a>';
+    let menu = '<a href="/member/login">로그인</a>';
+    if (sess) menu = '<a href="/member/logout">로그아웃</a>';
 
     appProps.menu = menu;
     console.log('app - ', appProps.menu);
