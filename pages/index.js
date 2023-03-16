@@ -1,7 +1,15 @@
+import Layout from "../components/layout/Layout";
+
 export default function Home() {
   return (
-      <div className="home">
+      <main className="home">
           <img className="ux" src="/img/ux.png" />
-      </div>
+      </main>
   )
 }
+
+Home.getLayout = (page) => (
+    <Layout meta={{title: "index"}}>
+        {page}
+    </Layout>
+);
