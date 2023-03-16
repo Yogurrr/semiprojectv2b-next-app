@@ -1,4 +1,6 @@
 import {signOut} from "next-auth/client";
+import Layout from "../../components/layout/Layout";
+import Home from "../index";
 
 export default function Logout() {
     return (
@@ -7,3 +9,9 @@ export default function Logout() {
         </main>
     );
 }
+
+Logout.getLayout = (page) => (
+    <Layout meta={{title: "로그아웃"}}>
+        {page}
+    </Layout>
+);

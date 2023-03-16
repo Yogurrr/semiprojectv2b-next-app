@@ -1,4 +1,6 @@
 import axios from "axios";
+import Layout from "../../components/layout/Layout";
+import Home from "../index";
 
 export async function getServerSideProps(ctx) {
     let bno = ctx.query.bno;
@@ -39,8 +41,8 @@ export default function View ({board}) {
                 <input type="hidden" id="uid" value={board.userid} />
 
                 <div><label></label>
-                    <button type="button" onclick={newOne}>새글쓰기</button>
-                    <button type="button" onclick={go2list}>목록으로</button>
+                    <button type="button" onClick={newOne}>새글쓰기</button>
+                    <button type="button" onClick={go2list}>목록으로</button>
                     <button type="button" onClick={updateOne} id="updatebtn">수정하기</button>
                     <button type="button" onClick={deleteOne} id="deletebtn">삭제하기</button>
                 </div>
@@ -49,3 +51,8 @@ export default function View ({board}) {
     )
 }
 
+View.getLayout = (page) => (
+    <Layout meta={{title: "본문보기"}}>
+        {page}
+    </Layout>
+);

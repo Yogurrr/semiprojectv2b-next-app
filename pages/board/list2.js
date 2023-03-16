@@ -2,6 +2,8 @@ import Link from "next/link";
 import fetch from "isomorphic-unfetch";
 import {useState} from "react";
 import axios from "axios";
+import Layout from "../../components/layout/Layout";
+import Home from "../index";
 // import mariadb from "../models/mariadb";
 
 const getStpgns = (cpg, alpg) => {
@@ -147,3 +149,9 @@ export default function List( {boards} )  {
         </main>
     )
 }
+
+List.getLayout = (page) => (
+    <Layout meta={{title: "게시판"}}>
+        {page}
+    </Layout>
+);

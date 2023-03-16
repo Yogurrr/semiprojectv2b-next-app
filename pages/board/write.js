@@ -1,6 +1,8 @@
 import {useState} from "react";
 import axios from "axios";
 import {check_captcha, handleInput, process_submit} from "../../components/Utils";
+import Layout from "../../components/layout/Layout";
+import Home from "../index";
 
 export default function Write()  {
 
@@ -49,3 +51,9 @@ export default function Write()  {
         </main>
     )
 }
+
+Write.getLayout = (page) => (
+    <Layout meta={{title: "새글쓰기"}}>
+        {page}
+    </Layout>
+);

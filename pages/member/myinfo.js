@@ -1,5 +1,7 @@
 import axios from "axios";
 import {getSession, signOut, useSession} from "next-auth/client";
+import Layout from "../../components/layout/Layout";
+import Home from "../index";
 
 export async function getServerSideProps(ctx) {
     // 세션 객체 가져오기
@@ -54,3 +56,9 @@ export default function Myinfo({member, session}) {
         </main>
     )
 }
+
+Myinfo.getLayout = (page) => (
+    <Layout meta={{title: "회원정보"}}>
+        {page}
+    </Layout>
+);
