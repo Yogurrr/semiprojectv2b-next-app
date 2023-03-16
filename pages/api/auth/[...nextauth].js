@@ -2,6 +2,7 @@
 // 경로 : /pages/api/auth/[...nextauth].js
 import Credentials from "next-auth/providers/credentials";
 import NextAuth from "next-auth";
+import axios from "axios";
 
 export default NextAuth({
     providers: [
@@ -16,7 +17,18 @@ export default NextAuth({
                 // 입력한 인증 정보 가져옴
                 const userid = credentials.userid;
                 const passwd = credentials.passwd;
-                if (userid === 'aaa111' && passwd === 'bbb111') {
+
+                // 인증 확인
+                let params = `?userid=${userid}&passwd=${passwd}`;
+                let url = `http://localhost:3000/api/member/login${params}`;
+                const res = await axios.get(url);
+                const result = await res.data
+
+                console.log('nextauth - ', await result);
+
+                // 인증에 성공해야만 로그인 성공
+                // if (userid === 'aaa111' && passwd === 'bbb111') {
+                if (await result.cnt > 0) {
                     return credentials;
                 }
             }
