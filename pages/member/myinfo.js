@@ -1,7 +1,8 @@
 import axios from "axios";
 import {getSession, signOut, useSession} from "next-auth/client";
+import Login from "./login";
 import Layout from "../../components/layout/Layout";
-import Home from "../index";
+import React from "react";
 
 export async function getServerSideProps(ctx) {
     // 세션 객체 가져오기

@@ -1,8 +1,8 @@
 import axios from "axios";
-import {useState} from "react";
+import React, {useState} from "react";
 import { check_captcha, handleInput, process_submit } from "../../components/Utils";
 import Layout from "../../components/layout/Layout";
-import Home from "../index";
+import List from "./list";
 
 export async function getServerSideProps(ctx) {
     let bno = ctx.query.bno;

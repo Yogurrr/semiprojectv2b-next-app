@@ -10,14 +10,14 @@ import '../public/css/normalize.css'
 import App from "next/app";
 
 function MyApp({ Component, pageProps, menu }) {
-    console.log('myapp - ', menu);
+    // console.log('myapp - ', menu);
 
-    pageProps.meta = menu;
+    pageProps.menu = menu;
 
     const getLayout = Component.getLayout ?? ((page) => page);
     return (
       <React.Fragment>
-          {getLayout(< Component {...pageProps} /> )}
+          {getLayout( <Component {...pageProps} /> )}
       </React.Fragment>
   )
 }
@@ -31,7 +31,7 @@ MyApp.getInitialProps = async (ctx) => {
     if (sess) menu = '<a href="/member/logout">로그아웃</a>';
 
     appProps.menu = menu;
-    console.log('app - ', appProps.menu);
+    // console.log('app - ', appProps.menu);
 
     return { ...appProps }
 }

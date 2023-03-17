@@ -45,7 +45,7 @@ export default NextAuth({
 
             return token;
             },
-        // session, userOrToken
+
         async session(session, userOrToken) {
             console.log('session - ', userOrToken);
             session.user.userid = userOrToken.userid;

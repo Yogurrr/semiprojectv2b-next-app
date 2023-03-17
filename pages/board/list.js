@@ -1,10 +1,10 @@
 import Link from "next/link";
 import fetch from "isomorphic-unfetch";
-import {useState} from "react";
+import React, {useState} from "react";
 import axios from "axios";
 import Layout from "../../components/layout/Layout";
+import Login from "../member/login"
 import Home from "../index";
-// import mariadb from "../models/mariadb";
 
 const getStpgns = (cpg, alpg) => {
     let stpgns = [];

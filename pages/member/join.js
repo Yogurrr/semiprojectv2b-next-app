@@ -1,4 +1,4 @@
-import {useState} from "react";
+import React, {useState} from "react";
 import {check_captcha, handleInput, hashPassword, process_submit} from "../../components/Utils";
 import {getSession} from "next-auth/client";
 import Layout from "../../components/layout/Layout";
@@ -39,7 +39,7 @@ export default function Join() {
         }
     };
     return (
-        <div className="jogin">
+        <main className="jogin">
             <script src="https://www.google.com/recaptcha/api.js" async defer></script>
             <h3>회원가입</h3>
             <form>
@@ -63,7 +63,7 @@ export default function Join() {
                     <button type="reset">다시입력</button>
                 </div>
             </form>
-        </div>
+        </main>
     )
 }
 

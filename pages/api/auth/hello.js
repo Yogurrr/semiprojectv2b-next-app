@@ -1,4 +1,4 @@
-import bcrypt from "bcrypt";
+import bcrypt from "bcryptjs";
 import {getRawProjectId} from "next/dist/telemetry/project-id";
 
 const saltRounds = 10;   // salt키 생성 횟수 지정
@@ -35,12 +35,12 @@ export default async (req, res) => {
         hashed2 = await hashPassword(passwd2);
 
         let isMatch1 = await comparePasswd('abc123', hashed1);
-        let isMatch2 = await comparePasswd('987xyz', hashed2);
+        let isMatch2 = await comparePasswd('987xyz', hashed1);
 
         console.log('auth - bcrypt', hashed1, hashed2);
         console.log('auth - bcrypt', isMatch1, isMatch2);
 
-        res.status(200).json({hashed1: hashed1, hashed2: hashed2});
+        res.status(200).json({ hashed1: hashed1, hashed2: hashed2 });
     } catch (err) {
         console.log(err.message);
         res.status(500).json(err);

@@ -1,4 +1,4 @@
-import Board from "/models/Board";
+import Board from "../../../models/Board";
 
 export default async (req, res) => {
     const {bno} = req.query;

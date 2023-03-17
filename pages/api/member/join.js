@@ -1,5 +1,5 @@
 import {useState} from "react";
-import Member from "/models/Member";
+import Member from "../../../models/Member";
 
 export default async (req, res) => {
     const {userid, passwd, name, email} = req.body;

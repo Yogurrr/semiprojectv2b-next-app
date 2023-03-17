@@ -1,6 +1,7 @@
 import axios from "axios";
 import Layout from "../../components/layout/Layout";
-import Home from "../index";
+import React from "react";
+import List from "./list"
 
 export async function getServerSideProps(ctx) {
     let bno = ctx.query.bno;
@@ -15,7 +16,7 @@ export async function getServerSideProps(ctx) {
 export default function View ({board}) {
 
     const newOne = () => { location.href = '/board/write'; };
-    const go2list = () => { location.href = '/board/list2'; };
+    const go2list = () => { location.href = '/board/list'; };
     const updateOne = () => { location.href = `/board/update?bno=${board.bno}`; }
     const deleteOne = () => {
         if (confirm('정말 삭제하시겠습니까?')) location.href = `/api/board/delete?bno=${board.bno}`;
@@ -52,7 +53,7 @@ export default function View ({board}) {
 }
 
 View.getLayout = (page) => (
-    <Layout meta={{title: "본문보기"}}>
+    <Layout meta={{title: "게시판 본문보기"}}>
         {page}
     </Layout>
 );
