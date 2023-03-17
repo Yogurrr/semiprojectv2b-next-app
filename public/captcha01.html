@@ -14,7 +14,7 @@
         <li>받아온 json 데이터에서 success 키가 true 인지 확인</li>
     </ul>
     <form action="?" method="POST">
-        <div class="g-recaptcha" data-sitekey=""></div>
+        <div class="g-recaptcha" data-sitekey="6LdU4OskAAAAAGphv-UlASNVhJs3LGCNl6cfbJJr"></div>
         <br/>
         <input type="submit" value="checkme" onclick="check_recaptcha()">
     </form>
@@ -24,7 +24,7 @@
             alert('클릭!!' + grecaptcha.getResponse());
             // console.log(grecaptcha.getResponse());
 
-            let secretkey = '';
+            let secretkey = '6LdU4OskAAAAAMNSn0psesLDz-1xnHJIDdOznlH-';
             let url = 'https://www.google.com/recaptcha/api/siteverify';
 
             let params = '?secret=' + secretkey;
@@ -43,6 +43,7 @@
             return false;*/
         }
 
+        // https://www.google.com/recaptcha/api/siteverify?secret=6LdU4OskAAAAAMNSn0psesLDz-1xnHJIDdOznlH-&response=03AFY_a8VOhnmmmXvP9jfH4kp5TxwmUuSLyRrGbr7pY43u89q-cUZ_jFRTXnZRQ_x6zmLWstjgUciz8Q7iD5Qr7OkZREEdNvPwRY7CjKfdRAo2XdrfqOK-9kqktvbyjrNsW6r85I7YifUKaLvVuPCiDw3RHoxoSxtsGOiMUXBpY0_9fiItGw0SLkckoqTlKusP4Xmpm0uWelv9x8tfWGuIPTo7rYTkFnoWVkmP0AEF1bb4YFTl5Fp8n1LhLfGKtak4rymnGKoeiiZxdQxS3apfdGJiT4GXr6bD2CK6RENOnXD3nInGNAOF-MfCWvjlEc_Ra_kobtA1D6Swakf0Y4XscukilQKIb0ncUyYGwDsk4NG8DsXpUm952IOOhKNUx1WuZH00mXIEyQw-zD9WFPCRYQ-tbmYdlFBJxmOfbpC25JuuIX4yAX_AKSb6ESWarQhKVk3VzZ3jWytTczGFNGSUb0uYKdHDKEalCv0kzfHHQKXIBBXm2jVOUqdXxgRDCzEbSQjZ9rHG7-Jd4xgfUMIIgaxD0gN2xZuNbQ
         // 빨리 돌리면 false인지 true인지 뜸 (기계로 하니까 빨리 가능)
     </script>
 </body>
