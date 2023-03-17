@@ -1,4 +1,4 @@
-import mariadb from "./MariaDB";
+import mariadb from "./mariadb";
 const ppg = 25;
 
 let boardsql = {
